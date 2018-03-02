@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-class Track extends BaseModel{
-	protected $trackLength;
-	protected $album_id;
+class Track extends BaseModel {
 
 	// @todo: improve to return minutes:seconds instead of just seconds
 	function getTrackLength() {

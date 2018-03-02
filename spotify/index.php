@@ -3,14 +3,11 @@
 require("core/init.php");
 require("templates/header.php");
 
-use App\Controllers\ArtistController;
-use App\Controllers\AlbumController;
+use App\Models\Album;
+use App\Models\Artist;
+use App\Models\Track;
 
-$artistController = new ArtistController($dbh);
-$artists = $artistController->getAll();
-
-$albumController = new AlbumController($dbh);
-// $albums = $albumController->getAll();
+$artists = Artist::get();
 
 ?>
 <h1>Artists</h1>
@@ -18,10 +15,15 @@ $albumController = new AlbumController($dbh);
 <?php
 	foreach ($artists as $artist) {
 		echo "<h2>{$artist->getName()}</h2>";
-		$albums = $albumController->getAllWhere('artist_id', $artist->getId());
+		$albums = Album::where('artist_id', $artist->getId())->get();
 		
 		foreach ($albums as $album) {
 			echo "<h3>{$album->getName()} ({$album->getReleaseYear()})</h3>";
+
+			$tracks = Track::where('album_id', $album->getId())->get();
+			foreach ($tracks as $track) {
+				echo "Låt: {$track->getName()}<br>";
+			}
 		}
 	}
 ?>

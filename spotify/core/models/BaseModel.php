@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-abstract class BaseModel {
-	protected $id;
-	protected $name;
+abstract class BaseModel extends \Illuminate\Database\Eloquent\Model {
 
 	function getId() {
 		return $this->id;

@@ -3,5 +3,23 @@
 require("vendor/autoload.php");
 require("config.php");
 
-// connect to database via PDO
-$dbh = new PDO("mysql:host=localhost;dbname=" . $config['database']['name'] . ";port=3306;charset=utf8mb4", $config['database']['user'], $config['database']['password']);
+use Illuminate\Database\Capsule\Manager as Capsule;
+
+$capsule = new Capsule;
+
+$capsule->addConnection([
+    'driver'    => 'mysql',
+    'host'      => 'localhost',
+    'database'  => $config['database']['name'],
+    'username'  => $config['database']['user'],
+    'password'  => $config['database']['password'],
+    'charset'   => 'utf8',
+    'collation' => 'utf8_unicode_ci',
+    'prefix'    => '',
+]);
+
+// Make this Capsule instance available globally via static methods... (optional)
+$capsule->setAsGlobal();
+
+// Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
+$capsule->bootEloquent();
