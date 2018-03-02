@@ -1,0 +1,19 @@
+{
+    "name": "jn/bank",
+    "description": "All Your Moneyz Belongs To Me",
+    "require": {
+        "illuminate/database": "^5.6"
+    },
+    "license": "WTFPL",
+    "authors": [
+        {
+            "name": "Johan Nordström",
+            "email": "johan@digitalvillage.se"
+        }
+	],
+	"autoload": {
+		"psr-4": {
+			"App\\Models\\":"models"
+		}
+	}
+}
